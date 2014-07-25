@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface ViewController : UIViewController
-
+@property (strong, nonatomic) NSString *player;
+@property (strong, nonatomic) NSString *computerPlayer;
+@property (strong, nonatomic) NSMutableArray *labels;
+@property (strong, nonatomic) NSTimer *playerTimer;
+@property int secondsLeft;
+@property BOOL playComputer;
 @end

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DF7E122F19828943007180CB /* SafariViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF7E122E19828943007180CB /* SafariViewController.m */; };
 		DFCFFB691981903A00FBAEA3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFCFFB681981903A00FBAEA3 /* Foundation.framework */; };
 		DFCFFB6B1981903A00FBAEA3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFCFFB6A1981903A00FBAEA3 /* CoreGraphics.framework */; };
 		DFCFFB6D1981903A00FBAEA3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFCFFB6C1981903A00FBAEA3 /* UIKit.framework */; };
@@ -21,6 +22,7 @@
 		DFCFFB8A1981903A00FBAEA3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFCFFB6C1981903A00FBAEA3 /* UIKit.framework */; };
 		DFCFFB921981903A00FBAEA3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DFCFFB901981903A00FBAEA3 /* InfoPlist.strings */; };
 		DFCFFB941981903A00FBAEA3 /* TicTacToeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DFCFFB931981903A00FBAEA3 /* TicTacToeTests.m */; };
+		DFCFFB9E1981911200FBAEA3 /* CheckMate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFCFFB9D1981911200FBAEA3 /* CheckMate.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DF7E122D19828943007180CB /* SafariViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SafariViewController.h; sourceTree = "<group>"; };
+		DF7E122E19828943007180CB /* SafariViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SafariViewController.m; sourceTree = "<group>"; };
 		DFCFFB651981903A00FBAEA3 /* TicTacToe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TicTacToe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFCFFB681981903A00FBAEA3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DFCFFB6A1981903A00FBAEA3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -53,6 +57,7 @@
 		DFCFFB8F1981903A00FBAEA3 /* TicTacToeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TicTacToeTests-Info.plist"; sourceTree = "<group>"; };
 		DFCFFB911981903A00FBAEA3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DFCFFB931981903A00FBAEA3 /* TicTacToeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TicTacToeTests.m; sourceTree = "<group>"; };
+		DFCFFB9D1981911200FBAEA3 /* CheckMate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CheckMate.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DFCFFB9E1981911200FBAEA3 /* CheckMate.framework in Frameworks */,
 				DFCFFB6B1981903A00FBAEA3 /* CoreGraphics.framework in Frameworks */,
 				DFCFFB6D1981903A00FBAEA3 /* UIKit.framework in Frameworks */,
 				DFCFFB691981903A00FBAEA3 /* Foundation.framework in Frameworks */,
@@ -101,6 +107,7 @@
 		DFCFFB671981903A00FBAEA3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DFCFFB9D1981911200FBAEA3 /* CheckMate.framework */,
 				DFCFFB681981903A00FBAEA3 /* Foundation.framework */,
 				DFCFFB6A1981903A00FBAEA3 /* CoreGraphics.framework */,
 				DFCFFB6C1981903A00FBAEA3 /* UIKit.framework */,
@@ -115,6 +122,8 @@
 				DFCFFB771981903A00FBAEA3 /* AppDelegate.h */,
 				DFCFFB781981903A00FBAEA3 /* AppDelegate.m */,
 				DFCFFB7A1981903A00FBAEA3 /* Main.storyboard */,
+				DF7E122D19828943007180CB /* SafariViewController.h */,
+				DF7E122E19828943007180CB /* SafariViewController.m */,
 				DFCFFB7D1981903A00FBAEA3 /* ViewController.h */,
 				DFCFFB7E1981903A00FBAEA3 /* ViewController.m */,
 				DFCFFB801981903A00FBAEA3 /* Images.xcassets */,
@@ -251,6 +260,7 @@
 			files = (
 				DFCFFB7F1981903A00FBAEA3 /* ViewController.m in Sources */,
 				DFCFFB791981903A00FBAEA3 /* AppDelegate.m in Sources */,
+				DF7E122F19828943007180CB /* SafariViewController.m in Sources */,
 				DFCFFB751981903A00FBAEA3 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -376,6 +386,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TicTacToe/TicTacToe-Prefix.pch";
 				INFOPLIST_FILE = "TicTacToe/TicTacToe-Info.plist";
@@ -389,6 +403,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TicTacToe/TicTacToe-Prefix.pch";
 				INFOPLIST_FILE = "TicTacToe/TicTacToe-Info.plist";
@@ -456,6 +474,7 @@
 				DFCFFB991981903A00FBAEA3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DFCFFB9A1981903A00FBAEA3 /* Build configuration list for PBXNativeTarget "TicTacToeTests" */ = {
 			isa = XCConfigurationList;
@@ -464,6 +483,7 @@
 				DFCFFB9C1981903A00FBAEA3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
