@@ -15,4 +15,5 @@
 @property (strong, nonatomic) NSTimer *playerTimer;
 @property int secondsLeft;
 @property BOOL playComputer;
+
 @end

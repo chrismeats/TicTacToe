@@ -7,17 +7,18 @@
 //
 
 #import "ViewController.h"
+#import "CustomUILabel.h"
 
 @interface ViewController () <UIAlertViewDelegate>
-@property (strong, nonatomic) IBOutlet UILabel *myLabelOne;
-@property (strong, nonatomic) IBOutlet UILabel *myLabelTwo;
-@property (strong, nonatomic) IBOutlet UILabel *myLabelThree;
-@property (strong, nonatomic) IBOutlet UILabel *myLabelFour;
-@property (strong, nonatomic) IBOutlet UILabel *myLabelFive;
-@property (strong, nonatomic) IBOutlet UILabel *myLabelSix;
-@property (strong, nonatomic) IBOutlet UILabel *myLabelSeven;
-@property (strong, nonatomic) IBOutlet UILabel *myLabelEight;
-@property (strong, nonatomic) IBOutlet UILabel *myLabelNine;
+@property (strong, nonatomic) IBOutlet CustomUILabel *myLabelOne;
+@property (strong, nonatomic) IBOutlet CustomUILabel *myLabelTwo;
+@property (strong, nonatomic) IBOutlet CustomUILabel *myLabelThree;
+@property (strong, nonatomic) IBOutlet CustomUILabel *myLabelFour;
+@property (strong, nonatomic) IBOutlet CustomUILabel *myLabelFive;
+@property (strong, nonatomic) IBOutlet CustomUILabel *myLabelSix;
+@property (strong, nonatomic) IBOutlet CustomUILabel *myLabelSeven;
+@property (strong, nonatomic) IBOutlet CustomUILabel *myLabelEight;
+@property (strong, nonatomic) IBOutlet CustomUILabel *myLabelNine;
 @property (strong, nonatomic) IBOutlet UILabel *whichPlayerLabel;
 @property (strong, nonatomic) IBOutlet UILabel *timerLabel;
 
@@ -26,11 +27,15 @@
 
 @implementation ViewController
 
-
+int xTaken[10];
+bool xPairs[16];
+int yTaken[10];
+bool yPairs[16];
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
     self.player = @"X";
     self.whichPlayerLabel.text = self.player;
 
@@ -47,13 +52,46 @@
     [self resetTimer];
     self.playerTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateCounter:) userInfo:nil repeats:YES];
     self.playComputer = NO;
+
+    /*
+     * Setup Grid Postion and Values
+     * Grid Position:
+     * 1 2 3
+     * 4 5 6
+     * 7 8 9
+     *
+     * Grid Values:
+     * 8 1 6
+     * 3 5 7
+     * 4 9 2
+     *
+     * Grid Values are used to calculate perfect Square. 3 values will == 15 if and only if there is a winner.
+     */
+    self.myLabelOne.gridPosition = 1;
+    self.myLabelOne.gridValue = 8;
+    self.myLabelTwo.gridPosition = 2;
+    self.myLabelTwo.gridValue = 1;
+    self.myLabelThree.gridPosition = 3;
+    self.myLabelThree.gridValue = 6;
+    self.myLabelFour.gridPosition = 4;
+    self.myLabelFour.gridValue = 3;
+    self.myLabelFive.gridPosition = 5;
+    self.myLabelFive.gridValue = 5;
+    self.myLabelSix.gridPosition = 6;
+    self.myLabelSix.gridValue = 7;
+    self.myLabelSeven.gridPosition = 7;
+    self.myLabelSeven.gridValue = 4;
+    self.myLabelEight.gridPosition = 8;
+    self.myLabelEight.gridValue = 9;
+    self.myLabelNine.gridPosition = 9;
+    self.myLabelNine.gridValue = 2;
 }
 
--(UILabel *)findLabelUsingPoint: (CGPoint)point
+-(CustomUILabel *)findLabelUsingPoint: (CGPoint)point
 {
     // Pass in point
     // Check if point intersects with any labels
-    for (UILabel *label in self.labels) {
+    for (CustomUILabel *label in self.labels) {
         if (CGRectContainsPoint(label.frame, point)) {
             return label;
         }
@@ -61,24 +99,31 @@
     return nil;
 }
 
--(void)doMove: (UILabel *)selectedLabel
+-(void)doMove: (CustomUILabel *)selectedLabel
 {
+    NSString *playerMoving = @"";
     // Ensure only empty labels can be changed
     if ([selectedLabel.text isEqualToString:@""]) {
         if ([self.player isEqualToString:@"X"]) {
+            playerMoving = @"X";
             selectedLabel.backgroundColor = [UIColor blueColor];
             // set label to player
             selectedLabel.text = self.player;
+            // update xTaken
+            xTaken[selectedLabel.gridPosition] = selectedLabel.gridValue;
             // switch to next player
             [self switchPlayer];
         } else {
+            playerMoving = @"O";
             selectedLabel.backgroundColor = [UIColor redColor];
             // Do reverse of above
             selectedLabel.text = self.player;
+            // Update yTaken
+            yTaken[selectedLabel.gridPosition] = selectedLabel.gridValue;
             [self switchPlayer];
         }
         // find winner
-        NSString *winner = [self whoWon];
+        NSString *winner = [self whoWon:playerMoving withSelectedLabe:selectedLabel];
         if (winner) {
             UIAlertView *alertView = [[UIAlertView alloc] init];
             alertView.title = @"Winner";
@@ -116,7 +161,7 @@
 
     CGPoint tappedPoint = [tapGesture locationInView:self.view];
 
-    UILabel *selectedLabel = [self findLabelUsingPoint:tappedPoint];
+    CustomUILabel *selectedLabel = [self findLabelUsingPoint:tappedPoint];
 
     if (selectedLabel) {
         [self doMove:selectedLabel];
@@ -132,7 +177,7 @@
     point.x += self.whichPlayerLabel.center.x;
     point.y += self.whichPlayerLabel.center.y;
 
-    UILabel *selectedLabel = [self findLabelUsingPoint:point];
+    CustomUILabel *selectedLabel = [self findLabelUsingPoint:point];
 
     if (selectedLabel) {
         [self doMove:selectedLabel];
@@ -148,54 +193,40 @@
 
 -(void)doComputerMove
 {
-    for (UILabel *label in self.labels) {
+    for (CustomUILabel *label in self.labels) {
         if ([label.text isEqualToString:@""]) {
             [self doMove:label];
             break;
         }
     }
 }
--(NSString *)whoWon
+-(NSString *)whoWon:(NSString *) player withSelectedLabe:(CustomUILabel *)selectedLabel
 {
 
-    // Check for winner in the leftmost column and top row
-    // 1==2 && 1==3 || 1==4 && 1 == 7
-    if (![self.myLabelOne.text isEqualToString:@""]) {
-        if ((([self.myLabelOne.text isEqualToString:self.myLabelTwo.text]) && ([self.myLabelOne.text isEqualToString:self.myLabelThree.text])) ||
-            (([self.myLabelOne.text isEqualToString:self.myLabelFour.text]) && ([self.myLabelOne.text isEqualToString:self.myLabelSeven.text]))
-            ) {
-            return self.myLabelOne.text;
-
+    if ([player isEqualToString:@"X"]) {
+        // use x arrays
+        if (xPairs[15]) {
+            return @"X";
+        } else {
+            for (int k = 1; k <= 10; k++) {
+                if (xTaken[k] && k != selectedLabel.gridPosition) {
+                    xPairs[selectedLabel.gridValue + xTaken[k]] = YES;
+                }
+            }
+        }
+    } else {
+        // use y arrays
+        if (yPairs[15]) {
+            return @"O";
+        } else {
+            for (int k = 1; k <= 10; k++) {
+                if (yTaken[k] && k!= selectedLabel.gridPosition) {
+                    yPairs[selectedLabel.gridValue + yTaken[k]] = YES;
+                }
+            }
         }
     }
 
-    // Check for winner through middle
-    // 5==4 && 5==6
-    // 5==2 && 5==8
-    // 5==1 && 5==9
-    // 5==3 && 5==7
-    if (![self.myLabelFive.text isEqualToString:@""]) {
-        if ((([self.myLabelFive.text isEqualToString:self.myLabelFour.text]) && ([self.myLabelFive.text isEqualToString:self.myLabelSix.text])) ||
-            (([self.myLabelFive.text isEqualToString:self.myLabelTwo.text]) && ([self.myLabelFive.text isEqualToString:self.myLabelEight.text])) ||
-            (([self.myLabelFive.text isEqualToString:self.myLabelOne.text]) && ([self.myLabelFive.text isEqualToString:self.myLabelNine.text])) ||
-            (([self.myLabelFive.text isEqualToString:self.myLabelThree.text]) && ([self.myLabelFive.text isEqualToString:self.myLabelSeven.text]))
-            ) {
-            return self.myLabelFive.text;
-            
-        }
-    }
-
-    // Check for win the right and low
-    // 9==6 && 9==3
-    // 9==8 && 9==7
-    if (![self.myLabelNine.text isEqualToString:@""]) {
-        if ((([self.myLabelNine.text isEqualToString:self.myLabelSix.text]) && ([self.myLabelNine.text isEqualToString:self.myLabelThree.text])) ||
-            (([self.myLabelNine.text isEqualToString:self.myLabelEight.text]) && ([self.myLabelNine.text isEqualToString:self.myLabelSeven.text]))
-            ) {
-            return self.myLabelNine.text;
-            
-        }
-    }
     return nil;
 }
 
@@ -203,14 +234,28 @@
 {
     if (buttonIndex == 0) {
         // Start Over
-        for (UILabel *label in self.labels) {
+        for (CustomUILabel *label in self.labels) {
             label.text = @"";
             label.backgroundColor = [UIColor lightGrayColor];
             self.player = @"X";
             self.whichPlayerLabel.text = self.player;
             self.playComputer = NO;
+            [self resetPrimitives];
             [self resetTimer];
         }
+    }
+}
+
+-(void)resetPrimitives
+{
+
+    for (int i = 0; i <= 10; i++) {
+        xTaken[i] = 0;
+        yTaken[i] = 0;
+    }
+    for (int i = 0; i <= 16; i++) {
+        xPairs[i] = NO;
+        yPairs[i] = NO;
     }
 }
 
@@ -229,7 +274,7 @@
 
 -(void)resetTimer
 {
-    self.secondsLeft = 10;
+    self.secondsLeft = 999999999;
     self.timerLabel.text = [NSString stringWithFormat:@"%d", self.secondsLeft];
 }
 

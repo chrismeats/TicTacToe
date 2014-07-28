@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DF7E122F19828943007180CB /* SafariViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF7E122E19828943007180CB /* SafariViewController.m */; };
+		DF7E12321982AF38007180CB /* CustomUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = DF7E12311982AF38007180CB /* CustomUILabel.m */; };
 		DFCFFB691981903A00FBAEA3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFCFFB681981903A00FBAEA3 /* Foundation.framework */; };
 		DFCFFB6B1981903A00FBAEA3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFCFFB6A1981903A00FBAEA3 /* CoreGraphics.framework */; };
 		DFCFFB6D1981903A00FBAEA3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFCFFB6C1981903A00FBAEA3 /* UIKit.framework */; };
@@ -38,6 +39,8 @@
 /* Begin PBXFileReference section */
 		DF7E122D19828943007180CB /* SafariViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SafariViewController.h; sourceTree = "<group>"; };
 		DF7E122E19828943007180CB /* SafariViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SafariViewController.m; sourceTree = "<group>"; };
+		DF7E12301982AF38007180CB /* CustomUILabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomUILabel.h; sourceTree = "<group>"; };
+		DF7E12311982AF38007180CB /* CustomUILabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomUILabel.m; sourceTree = "<group>"; };
 		DFCFFB651981903A00FBAEA3 /* TicTacToe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TicTacToe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFCFFB681981903A00FBAEA3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DFCFFB6A1981903A00FBAEA3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -122,6 +125,8 @@
 				DFCFFB771981903A00FBAEA3 /* AppDelegate.h */,
 				DFCFFB781981903A00FBAEA3 /* AppDelegate.m */,
 				DFCFFB7A1981903A00FBAEA3 /* Main.storyboard */,
+				DF7E12301982AF38007180CB /* CustomUILabel.h */,
+				DF7E12311982AF38007180CB /* CustomUILabel.m */,
 				DF7E122D19828943007180CB /* SafariViewController.h */,
 				DF7E122E19828943007180CB /* SafariViewController.m */,
 				DFCFFB7D1981903A00FBAEA3 /* ViewController.h */,
@@ -261,6 +266,7 @@
 				DFCFFB7F1981903A00FBAEA3 /* ViewController.m in Sources */,
 				DFCFFB791981903A00FBAEA3 /* AppDelegate.m in Sources */,
 				DF7E122F19828943007180CB /* SafariViewController.m in Sources */,
+				DF7E12321982AF38007180CB /* CustomUILabel.m in Sources */,
 				DFCFFB751981903A00FBAEA3 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
